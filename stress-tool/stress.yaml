@@ -1,0 +1,73 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.changecourse: Updating
+    deployment.kubernetes.io/revision: "9"
+  creationTimestamp: 2018-01-09T07:58:48Z
+  generation: 11
+  labels:
+    qcloud-app: stress
+  name: stress
+  namespace: default
+  resourceVersion: "338695454"
+  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/stress
+  uid: ec4b95d9-f512-11e7-be4f-52540068c27c
+spec:
+  minReadySeconds: 10
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      qcloud-app: stress
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        qcloud-app: stress
+    spec:
+      containers:
+      - args:
+        - -c
+        - stress-ng --vm 1 --vm-bytes 1424M
+        command:
+        - /bin/sh
+        image: yan234280533/stress-ng:v1.0
+        imagePullPolicy: Always
+        name: stress
+        resources:
+          limits:
+            cpu: 800m
+            memory: 1700Mi
+          requests:
+            cpu: 800m
+            memory: 1700Mi
+        securityContext:
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: qcloudregistrykey
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: 2018-01-09T09:56:17Z
+    lastUpdateTime: 2018-01-09T09:56:17Z
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 11
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
