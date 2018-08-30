@@ -8,15 +8,15 @@ RUN apt-get install -y \
   sudo  \
   curl  \
   net-tools \
+  iproute2 \
+  ssh \
+  lsof \
+  tcpdump \ 
+  telnet \
+  iputils-ping \
+  dnsutils \
+  inetutils-tools \
   supervisor
-
-RUN apt-get install -y \
-    iproute2 \
-    iputils-ping \
-    telnet \
-    dnsutils 
-
-ADD docker_dashboard-1.0.211-install.tar.gz /data/install
 
 COPY ./etc/supervisor/conf.d/*.conf   /etc/supervisor/conf.d/*.conf
  

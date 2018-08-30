@@ -8,6 +8,14 @@ RUN apt-get install -y \
   sudo  \
   curl  \
   net-tools \
+  iproute2 \
+  ssh \
+  lsof \
+  tcpdump \ 
+  inetutils-ping \
+  telnet \
+  dnsutils \
+  inetutils-tools \
   supervisor
 
 COPY ./etc/supervisor/conf.d/*.conf   /etc/supervisor/conf.d/*.conf
